@@ -142,7 +142,7 @@ def dump_fonts(font_formats: list[FontFormat]) -> list[int]:
                 case 'ttf.woff2':
                     builder.save_ttf(file_path, flavor=opentype.Flavor.WOFF2)
                 case _:
-                    getattr(builder, f'save_{font_format}')(file_path)
+                    getattr(builder, f'save_{font_format.replace('.', '_')}')(file_path)
             logger.info("Make font: '{}'", file_path)
 
         font_sizes.append(builder.font_metric.font_size)
