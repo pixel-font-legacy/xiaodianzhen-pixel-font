@@ -14,9 +14,9 @@ from tools.configs.options import FontFormat
 
 
 def dump_fonts(font_formats: list[FontFormat]) -> list[int]:
-    path_define.outputs_dir.mkdir(parents=True, exist_ok=True)
+    path_define.OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    tt_font = TTFont(path_define.fonts_dir.joinpath('xiaodianzhen.ttf'))
+    tt_font = TTFont(path_define.FONTS_DIR.joinpath('xiaodianzhen.ttf'))
     tb_eblc: table_E_B_L_C_ = tt_font['EBLC']
     tb_ebdt: table_E_B_D_T_ = tt_font['EBDT']
 
@@ -34,8 +34,8 @@ def dump_fonts(font_formats: list[FontFormat]) -> list[int]:
         builder.font_metric.vertical_layout.ascent = strike.bitmapSizeTable.vert.ascender
         builder.font_metric.vertical_layout.descent = strike.bitmapSizeTable.vert.descender
 
-        builder.meta_info.version = f'Dump {configs.version}'
-        builder.meta_info.created_time = datetime.fromisoformat(f'{configs.version.replace('.', '-')}T00:00:00Z')
+        builder.meta_info.version = f'Dump {configs.VERSION}'
+        builder.meta_info.created_time = datetime.fromisoformat(f'{configs.VERSION.replace('.', '-')}T00:00:00Z')
         builder.meta_info.modified_time = builder.meta_info.created_time
         builder.meta_info.family_name = f'XiaoDianZhen {builder.font_metric.font_size}px'
         builder.meta_info.weight_name = WeightName.REGULAR
@@ -131,7 +131,7 @@ def dump_fonts(font_formats: list[FontFormat]) -> list[int]:
             ))
 
         for font_format in font_formats:
-            file_path = path_define.outputs_dir.joinpath(f'xiaodianzhen-{builder.font_metric.font_size}px.{font_format}')
+            file_path = path_define.OUTPUTS_DIR.joinpath(f'xiaodianzhen-{builder.font_metric.font_size}px.{font_format}')
             getattr(builder, f'save_{font_format.replace('.', '_')}')(file_path)
             logger.info("Make font: '{}'", file_path)
 
