@@ -9,7 +9,7 @@ from tools.configs import path_define
 from tools.configs.options import FontFormat
 
 
-def make_release_zips(font_sizes: list[int], font_formats: list[FontFormat]):
+def make_release_zips(font_sizes: list[int], font_formats: list[FontFormat]) -> None:
     path_define.RELEASES_DIR.mkdir(parents=True, exist_ok=True)
 
     for font_format in font_formats:
@@ -22,7 +22,7 @@ def make_release_zips(font_sizes: list[int], font_formats: list[FontFormat]):
         logger.info("Make release zip: '{}'", file_path)
 
 
-def update_www(font_sizes: list[int]):
+def update_www(font_sizes: list[int]) -> None:
     if path_define.WWW_FONTS_DIR.exists():
         shutil.rmtree(path_define.WWW_FONTS_DIR)
     path_define.WWW_FONTS_DIR.mkdir(parents=True)
