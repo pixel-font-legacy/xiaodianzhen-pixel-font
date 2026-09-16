@@ -1,4 +1,5 @@
 import itertools
+from collections.abc import Sequence
 from datetime import datetime
 
 from fontTools.ttLib import TTFont
@@ -13,7 +14,7 @@ from tools.configs import path_define
 from tools.configs.options import FontFormat
 
 
-def dump_fonts(font_formats: list[FontFormat]) -> list[int]:
+def dump_fonts(font_formats: Sequence[FontFormat]) -> list[int]:
     path_define.OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
 
     tt_font = TTFont(path_define.FONTS_DIR.joinpath('xiaodianzhen.ttf'))
